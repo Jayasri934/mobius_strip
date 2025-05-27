@@ -1,0 +1,31 @@
+Code Structure:
+
+The program defines a MobiusStrip class that models a Möbius strip using its parametric equations. The class takes three parameters:
+               * R: Radius from the center to the midline of the strip
+               * w: Width of the strip
+               * n: Resolution (number of mesh points for accuracy)
+
+The class includes:
+
+          * compute(): Generates 3D coordinates (x, y, z) based on the parametric equations.
+          * surface(): Approximates the surface area by computing the cross product of partial derivatives and integrating over the mesh grid.
+          * edge(): Approximates the edge length by computing distances along one edge of the strip.
+          * plot(): Creates a 3D visualization of the Mobius strip using matplotlib.
+
+Surface Area Approximation:
+
+The surface area is computed using:
+                    * Numerical partial derivatives (np.gradient) to get tangent vectors.
+                    * The magnitude of the cross product of these vectors gives local surface elements (dA).
+                    * The total area is integrated using the trapezoidal rule (np.trapz), applied twice (over u and v).
+
+
+Edge Length Calculation:
+               The edge is parameterized using v = w/2. A 1D array of points along u is used to calculate distances between adjacent points, which are then added using numerical integration.
+
+
+Challenges Faced:
+          * Firstly it is a complex problem it took time to learn and implement
+          * Numerical Stability: Getting an accurate and smooth surface required careful choice of resolution (n=300) and numerical differentiation.
+          * Surface Area Integration: Using np.trapz was acceptable, but Simpsons rule provided more precision with a fine mesh.
+          * Visualization: Achieving a clean 3D plot with good aesthetics and clarity took some tuning of plot parameters (stride, color, alpha).
